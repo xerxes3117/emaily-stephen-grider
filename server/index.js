@@ -1,30 +1,28 @@
-const express = require('express');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./config/keys');
+require('dotenv').config({ path: `./config/.env.${process.env.NODE_ENV}` })
 
-const PORT = process.env.PORT || 5002;
+const express = require('express');
+const cookieSession = require('cookie-session');
+const mongoose = require('mongoose');
+const passport = require('passport');
+
+require('./models/User')
+require('./services/passport');
+
+mongoose.connect(process.env.MONGO_URI)
 
 const app = express();
 
-//PASSPORT JS setup
-passport.use(
-  new GoogleStrategy({
-    clientID: keys.GOOGLE_CLIENT_ID,
-    clientSecret: keys.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
-  }, (accessToken, refreshToken, profile, done) => {
-    console.log(accessToken)
-    console.log(refreshToken)
-    console.log(profile)
-  })
-);
-
-app.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [process.env.COOKIE_KEY]
   })
 )
 
-app.get('/auth/google/callback', passport.authenticate('google'))
+app.use(passport.initialize())
+app.use(passport.session())
 
+require('./routes/authRoutes')(app);
+
+const PORT = process.env.PORT || 5002;
 app.listen(PORT);
