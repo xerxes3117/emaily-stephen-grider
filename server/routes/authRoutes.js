@@ -7,10 +7,11 @@ module.exports = function(app) {
   )
   
   app.get('/auth/google/callback', passport.authenticate('google'),  (req, res) => {
-    res.redirect('/surveys')
+    res.redirect('http://localhost:3004/surveys')
   })
 
   app.get('/api/logout', (req, res) => {
+    res.redirect('http://localhost:3004')
     req.logout();
     res.send(req.user);
   })
