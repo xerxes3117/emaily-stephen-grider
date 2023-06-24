@@ -1,0 +1,27 @@
+{
+  "name": "emaily-stephen-grider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "BROWSER=none PORT=3004 npm run start --prefix client",
+    "server_dev": "NODE_ENV=development nodemon index.js --prefix server",
+    "server_prod": "NODE_ENV=production nodemon index.js --prefix server",
+    "dev": "concurrently \"npm run server_dev\" \"npm run client\"",
+    "prod": "concurrently \"npm run server_prod\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xerxes3117/emaily-stephen-grider.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xerxes3117/emaily-stephen-grider/issues"
+  },
+  "homepage": "https://github.com/xerxes3117/emaily-stephen-grider#readme",
+  "dependencies": {
+    "concurrently": "^8.2.0",
+    "dotenv": "^16.3.1"
+  }
+}

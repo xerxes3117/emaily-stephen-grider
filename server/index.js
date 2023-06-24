@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./config/.env.${process.env.NODE_ENV}` })
+require('dotenv').config({ path: `./server/config/.env.${process.env.NODE_ENV}` })
 
 const express = require('express');
 const cookieSession = require('cookie-session');
