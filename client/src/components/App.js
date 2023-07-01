@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions'
 import Header from './Header';
+import Landing from './Landing';
 
 function App(props) {
   useEffect(() => {
@@ -15,7 +16,7 @@ function App(props) {
       <BrowserRouter>
         <div>
           <Header />
-          <Route exact path="/" component={() => <div>Landing</div>} />
+          <Route exact path="/" component={Landing} />
           <Route exact path="/surveys" component={() => <div>Dashboard</div>} />
           <Route path="/surveys/new" component={() => <div>Dashboard</div>} />
         </div>

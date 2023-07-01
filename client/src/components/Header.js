@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
+import Payments from './Payments';
 
 function Header({ auth }) {
   const renderLeftContent = () => {
@@ -9,14 +11,21 @@ function Header({ auth }) {
       case false:
         return <li><a href='/auth/google'>Login with Google</a></li>
       default:
-        return <li><a>Logout</a></li>
+        return (
+          <>
+            <li>
+              <Payments />
+            </li>
+            <li><a href='/api/logout'>Logout</a></li>
+          </>
+        )
     }
   };
 
   return (
     <nav>
       <div className='nav-wrapper'>
-        <a className='left brand-logo'>Emaily</a>
+        <Link to={auth ? '/surveys' : '/'} className='left brand-logo'>Emaily</Link>
         <ul className='right'>
           {renderLeftContent()}
         </ul>

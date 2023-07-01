@@ -7,12 +7,12 @@ module.exports = function(app) {
   )
   
   app.get('/auth/google/callback', passport.authenticate('google'),  (req, res) => {
-    res.redirect('/surveys')
+    res.redirect('http://localhost:3004/surveys')
   })
 
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('http://localhost:3004')
   })
 
   app.get('/api/current_user', (req, res) => {
