@@ -1,11 +1,13 @@
 import React from 'react'
 import StripeCheckout from 'react-stripe-checkout';
+import { connect } from 'react-redux'
+import * as actions from '../actions';
 
-function Payments() {
+function Payments({ handleToken }) {
   return (
-    <StripeCheckout 
+    <StripeCheckout
       amount={500}
-      token={token => console.log(token)}
+      token={token => handleToken(token)}
       stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY}
       name="Emaily"
       description='$5 for 5 email credits'
@@ -17,4 +19,4 @@ function Payments() {
   )
 }
 
-export default Payments
+export default connect(null, actions)(Payments);
