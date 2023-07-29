@@ -5,6 +5,7 @@ const cookieSession = require('cookie-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 require('./models/User')
 require('./services/passport');
@@ -21,6 +22,8 @@ app.use(
     keys: [process.env.COOKIE_KEY]
   })
 )
+
+app.use(morgan('common'));
 
 app.use(passport.initialize())
 app.use(passport.session())
